@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'model/product.dart';
 import 'model/products_repository.dart';
+import 'supplemental/asymmetric_view.dart';
 
 class HomePage extends StatelessWidget {
   List<Card> _buildGridCards(BuildContext context) {
@@ -30,12 +31,13 @@ class HomePage extends StatelessWidget {
 
     return products.map((product) {
       return Card(
+        elevation: 0.0,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             AspectRatio(
               
-              aspectRatio: 18 / 11.0,
+              aspectRatio: 19 / 11.0,
               child: Image.asset(
                 product.assetName,
                 package: product.assetPackage,
@@ -70,36 +72,6 @@ class HomePage extends StatelessWidget {
     }).toList();
   }
 
-  // List<Card> _buildGridCards(int count){
-
-  //   List<Card> cards = List.generate(count, (int index)=>Card(
-  //     child: Column(
-  //               crossAxisAlignment: CrossAxisAlignment.start,
-  //               children: <Widget>[
-  //                 AspectRatio(
-  //                   aspectRatio: 18.0 / 11.0,
-  //                   child: Image.asset('assets/diamond.png'),
-  //                 ),
-  //                 Padding(
-  //                   padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-  //                   child: Column(
-  //                     crossAxisAlignment: CrossAxisAlignment.start,
-  //                     children: <Widget>[
-  //                       Text('Title'),
-  //                       SizedBox(
-  //                         height: 8.0,
-  //                       ),
-  //                       Text('Secondary Text'),
-  //                     ],
-  //                   ),
-  //                 )
-  //               ],
-  //             ),
-  //   ));
-  //   return cards;
-
-  // }
-
   // TODO: Add a variable for Category (104)
   @override
   Widget build(BuildContext context) {
@@ -107,14 +79,38 @@ class HomePage extends StatelessWidget {
     // TODO: Pass Category variable to AsymmetricView (104)
     return Scaffold(
       appBar: AppBar(
+        brightness: Brightness.light,
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: (){
+            print('Menu button');
+
+          },
+        ),
         title: Text('SHRINE'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: (){
+              print('Search button');
+            },
+
+          ),
+          IconButton(
+            icon: Icon(Icons.tune),
+            onPressed: (){
+              print('Filter button');
+            },
+          )
+        ],
       ),
       // TODO: Add a grid view (102)
-      body: GridView.count(
-        crossAxisCount: 2,
-        padding: EdgeInsets.all(16.0),
-        children: _buildGridCards(context),
-      ),
+      // body: GridView.count(
+      //   crossAxisCount: 2,
+      //   padding: EdgeInsets.all(16.0),
+      //   children: _buildGridCards(context),
+      // ),
+      body: AsymmetricView(products: ProductsRepository.loadProducts(Category.all),),
       // TODO: Set resizeToAvoidBottomInset (101)
     );
   }

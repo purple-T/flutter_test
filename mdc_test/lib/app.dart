@@ -16,6 +16,8 @@ import 'package:flutter/material.dart';
 
 import 'home.dart';
 import 'login.dart';
+import 'colors.dart';
+import 'supplemental/cut_corners_border.dart';
 
 // TODO: Convert ShrineApp to stateful widget (104)
 class ShrineApp extends StatelessWidget {
@@ -30,8 +32,10 @@ class ShrineApp extends StatelessWidget {
       // TODO: Pass _currentCategory for frontLayer (104)
       // TODO: Change backLayer field value to CategoryMenuPage (104)
       initialRoute: '/login',
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: _getRoute,
       // TODO: Add a theme (103)
+      theme: _kbuildShrineTheme,
     );
   }
 
@@ -49,4 +53,78 @@ class ShrineApp extends StatelessWidget {
 }
 
 // TODO: Build a Shrine Theme (103)
+TextTheme _buildShrineTextTheme(TextTheme base){
+  return base.copyWith(
+    headline: base.headline.copyWith(
+      fontWeight: FontWeight.w500,
+    ),
+    title: base.title.copyWith(
+      fontSize: 18.0,
+    ),
+    caption: base.caption.copyWith(
+      fontWeight: FontWeight.w400,
+      fontSize: 14.0,
+    ),
+  ).apply(
+    fontFamily: 'Rubik',
+    displayColor: kShrineBrown900,
+    bodyColor: kShrineBrown900,
+  );
+
+}
+
+
+final ThemeData _kbuildShrineTheme = _buildShrineTheme();
+
+ThemeData _buildShrineTheme() {
+  final ThemeData base = ThemeData.dark();
+  return base.copyWith(
+    accentColor: kShrineAltDarkGrey,
+    primaryColor: kShrineAltDarkGrey,
+    buttonColor: kShrineAltYellow,
+    scaffoldBackgroundColor: kShrineAltDarkGrey,
+    cardColor: kShrineAltDarkGrey,
+    textSelectionColor: kShrinePink100,
+    errorColor: kShrineErrorRed,
+    // TODO: Add the text themes (103)
+    textTheme: _buildShrineTextTheme(base.textTheme),
+    primaryTextTheme: _buildShrineTextTheme(base.primaryTextTheme),
+    accentTextTheme: _buildShrineTextTheme(base.accentTextTheme),
+    // TODO: Add the icon themes (103)
+    primaryIconTheme: base.iconTheme.copyWith(
+      color: kShrineAltYellow,
+    ),
+    // TODO: Decorate the inputs (103)
+    inputDecorationTheme: InputDecorationTheme(
+      border: CutCornersBorder(),
+    ),
+
+  );
+
+
+
+  //   accentColor: kShrineBrown900,
+  //   primaryColor: kShrinePink100,
+  //   buttonColor: kShrinePink100,
+  //   scaffoldBackgroundColor: kShrineBackgroundWhite,
+  //   cardColor: kShrineBackgroundWhite,
+  //   textSelectionColor: kShrinePink100,
+  //   errorColor: kShrineErrorRed,
+  //   // TODO: Add the text themes (103)
+  //   textTheme: _buildShrineTextTheme(base.textTheme),
+  //   primaryTextTheme: _buildShrineTextTheme(base.primaryTextTheme),
+  //   accentTextTheme: _buildShrineTextTheme(base.accentTextTheme),
+  //   // TODO: Add the icon themes (103)
+  //   primaryIconTheme: base.iconTheme.copyWith(
+  //     color: kShrineBrown900,
+  //   ),
+  //   // TODO: Decorate the inputs (103)
+  //   inputDecorationTheme: InputDecorationTheme(
+  //     border: CutCornersBorder(),
+  //   ),
+
+  // );
+
+}
+
 // TODO: Build a Shrine Text Theme (103)
