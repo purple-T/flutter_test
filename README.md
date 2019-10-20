@@ -7,3 +7,5 @@
 - mac上打开ios模拟器命令： open -a Simulator
 - 检查flutter安装： flutter doctor
 - 更新pubspec.yaml中的内容： flutter packages get
+- comand+shift+P 打开命令面板
+- ctrl+`  打开vscode终端
